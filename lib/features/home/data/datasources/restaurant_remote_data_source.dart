@@ -1,10 +1,7 @@
-import 'dart:convert';
-
-import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:swagat_restaurant/core/error/exception.dart';
-import 'package:swagat_restaurant/core/error/failure.dart';
-import 'package:swagat_restaurant/features/home/data/models/food_model.dart';
+
+import '../../../../core/error/exception.dart';
+import '../models/food_model.dart';
 
 abstract interface class RestaurantRemoteDataSource {
   Future<List<FoodModel>> getRestaurantMenu();

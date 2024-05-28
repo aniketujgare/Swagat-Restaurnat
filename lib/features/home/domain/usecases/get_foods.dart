@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fpdart/fpdart.dart';
 
 import '../../../../core/error/failure.dart';
@@ -13,4 +14,13 @@ class GetFoods implements UseCase<List<Food>, NoParams> {
   Future<Either<Failure, List<Food>>> call(NoParams params) async {
     return await foodRepository.getFoodItems();
   }
+}
+
+class GetFoodItemsParams {
+  String name;
+  int id;
+  GetFoodItemsParams({
+    required this.name,
+    required this.id,
+  });
 }

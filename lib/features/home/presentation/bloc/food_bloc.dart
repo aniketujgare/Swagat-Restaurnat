@@ -17,11 +17,11 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
       : _getFoods = getFoods,
         super(const FoodState.initial()) {
     on<FoodEvent>((event, emit) => emit(const FoodState.loading()));
+
     on<_FoodGet>(_getFoodList);
   }
 
-  Future<FutureOr<void>> _getFoodList(
-      _FoodGet event, Emitter<FoodState> emit) async {
+  void _getFoodList(_FoodGet event, Emitter<FoodState> emit) async {
     final res = await _getFoods(NoParams());
 
     res.fold(
