@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:swagat_restaurant/core/routes/router.dart';
 import 'package:swagat_restaurant/features/home/presentation/bloc/food_bloc.dart';
 
 import 'core/theme/theme.dart';
@@ -25,13 +26,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Swagat Restaurant',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightThemeMode,
 
       // theme: AppTheme.darkThemeMode,
-      home: const HomePage(),
     );
   }
 }

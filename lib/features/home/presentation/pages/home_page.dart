@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:swagat_restaurant/core/constants/constants.dart';
 import 'package:swagat_restaurant/core/theme/app_pallete.dart';
@@ -11,6 +12,7 @@ import '../../../../core/common/widgets/loader.dart';
 import '../../../../core/utils/show_snackbar.dart';
 import '../../domain/entities/food.dart';
 import '../bloc/food_bloc.dart';
+import '../widgets/bag_icon_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,10 +23,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final bannerCotroller =
-      PageController(viewportFraction: 0.92, keepPage: true);
+      PageController(viewportFraction: 0.91, keepPage: true);
+  final trendingMealController =
+      PageController(viewportFraction: 0.8, keepPage: true);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      trendingMealController
+          .jumpTo(trendingMealController.position.maxScrollExtent * 0.2);
+    });
+  }
+
   @override
   void dispose() {
     bannerCotroller.dispose();
+    trendingMealController.dispose();
 
     super.dispose();
   }
@@ -118,35 +133,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const Spacer(),
-                Stack(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.shopping_bag_outlined,
-                        color: AppPallete.misticBlueShade1,
-                      ),
-                      iconSize: 28,
-                      padding: EdgeInsets.zero,
-                    ),
-                    Positioned(
-                      bottom:
-                          10, // Adjust this value to change the vertical offset
-                      right: 10,
-                      child: CircleAvatar(
-                        backgroundColor: AppPallete.red,
-                        radius: 7,
-                        child: Text(
-                          '3',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall
-                              ?.copyWith(color: AppPallete.whiteColor),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                const CartIconButton(),
               ],
             ),
           ),
@@ -287,17 +274,36 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             height: 220,
-            child: ListView(
-              padding: EdgeInsets.symmetric(
-                horizontal: Constants.horizontalMargin,
-              ),
-              scrollDirection: Axis.horizontal,
-              children: List.generate(
-                3,
-                (index) => SizedBox(
-                    width: 320, child: _buildTrendingMealCard(context)),
-              ).toList(),
-            ),
+            child:
+                // PageView.builder(
+                //     itemCount: 3,
+                //     controller: trendingMealController,
+                //     scrollDirection: Axis.horizontal,
+                //     itemBuilder: (context, index) {
+                //       return SizedBox(
+                //         width: 320,
+                //         child: _buildTrendingMealCard(context),
+                //       );
+                //     })
+
+                ListView.builder(
+                    itemCount: 3,
+                    itemExtent: 320,
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Constants.horizontalMargin),
+                    itemBuilder: (_, index) => GestureDetector(
+                        onTap: () => context.push("/details"),
+                        child: _buildTrendingMealCard(context))
+                    // physics: PageScrollPhysics(),
+                    // padding: EdgeInsets.symmetric(
+                    //   horizontal: Constants.horizontalMargin,
+                    // ),
+                    // children: List.generate(
+                    //   3,
+                    //   (index) => _buildTrendingMealCard(context),
+                    // ).toList(),
+                    ),
           ),
           SizedBoxHeight4,
         ],
