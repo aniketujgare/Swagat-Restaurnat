@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:swagat_restaurant/core/constants/constants.dart';
-import 'package:swagat_restaurant/core/utils/sized_boxes.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/app_pallete.dart';
+import '../../../../core/utils/sized_boxes.dart';
 import '../widgets/bag_icon_button.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -54,7 +53,17 @@ class _DetailsPageState extends State<DetailsPage> {
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: Constants.horizontalMargin),
-                child: const CartIconButton(),
+                child: AppBarActionIconButton(
+                  icon: Icons.shopping_bag_outlined,
+                  onPressed: () {},
+                  badge: Text(
+                    '3',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppPallete.whiteColor,
+                          fontSize: 10,
+                        ),
+                  ),
+                ),
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(

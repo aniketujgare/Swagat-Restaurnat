@@ -1,27 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:swagat_restaurant/core/constants/constants.dart';
-import 'package:swagat_restaurant/core/theme/app_pallete.dart';
-import 'package:swagat_restaurant/core/utils/sized_boxes.dart';
 
-import '../../../../core/common/widgets/loader.dart';
-import '../../../../core/utils/show_snackbar.dart';
-import '../../domain/entities/food.dart';
-import '../bloc/food_bloc.dart';
+import '../../../../core/constants/constants.dart';
+import '../../../../core/theme/app_pallete.dart';
+import '../../../../core/utils/sized_boxes.dart';
 import '../widgets/bag_icon_button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ExplorePage extends StatefulWidget {
+  const ExplorePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ExplorePage> createState() => _ExplorePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ExplorePageState extends State<ExplorePage> {
   final bannerCotroller =
       PageController(viewportFraction: 0.91, keepPage: true);
   final trendingMealController =
@@ -47,36 +42,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.square_grid_2x2,
-              ),
-              label: 'Explore'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.search,
-              ),
-              label: 'Search'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.tag,
-              ),
-              label: 'Deals'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.tray,
-              ),
-              label: 'Inbox'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.person,
-              ),
-              label: 'Account'),
-        ],
-      ),
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, kToolbarHeight),
         child: SafeArea(
@@ -100,7 +65,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 SvgPicture.asset(
                   'assets/svg/place.svg',
-                  color: AppPallete.green,
+                  colorFilter:
+                      const ColorFilter.mode(AppPallete.green, BlendMode.color),
                   height: 25,
                 ),
                 SizedBoxWidth10,
@@ -133,13 +99,22 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const Spacer(),
-                const CartIconButton(),
+                AppBarActionIconButton(
+                  icon: Icons.shopping_bag_outlined,
+                  badge: Text(
+                    '3',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppPallete.whiteColor,
+                          fontSize: 10,
+                        ),
+                  ),
+                  onPressed: () {},
+                ),
               ],
             ),
           ),
         ),
       ),
-
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -274,60 +249,19 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             height: 220,
-            child:
-                // PageView.builder(
-                //     itemCount: 3,
-                //     controller: trendingMealController,
-                //     scrollDirection: Axis.horizontal,
-                //     itemBuilder: (context, index) {
-                //       return SizedBox(
-                //         width: 320,
-                //         child: _buildTrendingMealCard(context),
-                //       );
-                //     })
-
-                ListView.builder(
-                    itemCount: 3,
-                    itemExtent: 320,
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Constants.horizontalMargin),
-                    itemBuilder: (_, index) => GestureDetector(
-                        onTap: () => context.push("/details"),
-                        child: _buildTrendingMealCard(context))
-                    // physics: PageScrollPhysics(),
-                    // padding: EdgeInsets.symmetric(
-                    //   horizontal: Constants.horizontalMargin,
-                    // ),
-                    // children: List.generate(
-                    //   3,
-                    //   (index) => _buildTrendingMealCard(context),
-                    // ).toList(),
-                    ),
+            child: ListView.builder(
+                itemCount: 3,
+                itemExtent: 320,
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.symmetric(
+                    horizontal: Constants.horizontalMargin),
+                itemBuilder: (_, index) => GestureDetector(
+                    onTap: () => context.push("/details"),
+                    child: _buildTrendingMealCard(context))),
           ),
           SizedBoxHeight4,
         ],
       ),
-      // body:
-
-      //  BlocConsumer<FoodBloc, FoodState>(
-      //   listener: (context, state) {
-      //     state.mapOrNull(
-      //       faiure: (value) => showSnackBar(context, value.error),
-      //     );
-      //   },
-      //   builder: (context, state) {
-      //     return state.mapOrNull(
-      //           initial: (value) {
-      //             context.read<FoodBloc>().add(const FoodEvent.foodGet());
-      //             return;
-      //           },
-      //           loading: (_) => const Loader(),
-      //           success: (value) => _buildFoodList(value.foods),
-      //         ) ??
-      //         const SizedBox.shrink();
-      //   },
-      // ),
     );
   }
 
@@ -538,35 +472,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  _buildFoodList(List<Food> foods) {
-    return ListView.builder(
-      itemCount: foods.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Text(foods[index].name);
-      },
-    );
-  }
 }
-
-
-/*
- BlocConsumer<FoodBloc, FoodState>(
-        listener: (context, state) {
-          state.mapOrNull(
-            faiure: (value) => showSnackBar(context, value.error),
-          );
-        },
-        builder: (context, state) {
-          return state.mapOrNull(
-                initial: (value) {
-                  context.read<FoodBloc>().add(const FoodEvent.foodGet());
-                  return;
-                },
-                loading: (_) => const Loader(),
-                success: (value) => _buildFoodList(value.foods),
-              ) ??
-              const SizedBox.shrink();
-        },
-      ),
-*/

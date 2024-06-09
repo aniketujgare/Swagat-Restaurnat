@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:swagat_restaurant/core/usecase/usecase.dart';
 
+import '../../../../core/usecase/usecase.dart';
 import '../../domain/entities/food.dart';
 import '../../domain/usecases/get_foods.dart';
 

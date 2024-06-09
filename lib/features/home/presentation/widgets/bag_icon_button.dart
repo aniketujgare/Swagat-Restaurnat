@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_pallete.dart';
 
-class CartIconButton extends StatelessWidget {
-  const CartIconButton({super.key});
+class AppBarActionIconButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onPressed;
+  final Widget? badge;
+  const AppBarActionIconButton(
+      {super.key, required this.icon, required this.onPressed, this.badge});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.shopping_bag_outlined,
+          onPressed: onPressed,
+          icon: Icon(
+            icon,
             color: AppPallete.misticBlueShade1,
           ),
           iconSize: 28,
@@ -21,21 +25,16 @@ class CartIconButton extends StatelessWidget {
             backgroundColor: WidgetStatePropertyAll(AppPallete.whiteColor),
           ),
         ),
-        Positioned(
-          bottom: 11, // Adjust this value to change the vertical offset
-          right: 11,
-          child: CircleAvatar(
-            backgroundColor: AppPallete.red,
-            radius: 6,
-            child: Text(
-              '3',
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: AppPallete.whiteColor,
-                    fontSize: 10,
-                  ),
+        if (badge != null)
+          Positioned(
+            bottom: 11, // Adjust this value to change the vertical offset
+            right: 11,
+            child: CircleAvatar(
+              backgroundColor: AppPallete.red,
+              radius: 6,
+              child: badge,
             ),
           ),
-        ),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'app_pallete.dart';
 
@@ -34,10 +33,8 @@ class AppTheme {
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
       ),
-      displaySmall: TextStyle(
-        fontFamily: 'Gilroy',
-        color: AppPallete.black,
-      ),
+      displaySmall:
+          TextStyle(fontFamily: 'Gilroy', color: AppPallete.misticBlueShade1),
       bodyLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
@@ -48,10 +45,8 @@ class AppTheme {
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
       ),
-      bodySmall: TextStyle(
-        fontFamily: 'Gilroy',
-        color: AppPallete.black,
-      ),
+      bodySmall:
+          TextStyle(fontFamily: 'Gilroy', color: AppPallete.misticBlueShade1),
       headlineLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
@@ -62,10 +57,8 @@ class AppTheme {
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
       ),
-      headlineSmall: TextStyle(
-        fontFamily: 'Gilroy',
-        color: AppPallete.black,
-      ),
+      headlineSmall:
+          TextStyle(fontFamily: 'Gilroy', color: AppPallete.misticBlueShade1),
       labelLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,

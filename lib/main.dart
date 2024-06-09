@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:swagat_restaurant/core/routes/router.dart';
-import 'package:swagat_restaurant/features/home/presentation/bloc/food_bloc.dart';
 
+import 'core/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'core/routes/router.dart';
 import 'core/theme/theme.dart';
-import 'features/home/presentation/pages/home_page.dart';
+import 'features/home/presentation/bloc/food_bloc.dart';
 import 'init_dependencies.dart';
 
 Future<void> main() async {
@@ -14,6 +14,9 @@ Future<void> main() async {
     providers: [
       BlocProvider(
         create: (context) => serviceLocator<FoodBloc>(),
+      ),
+      BlocProvider(
+        create: (context) => serviceLocator<DashboardCubit>(),
       ),
     ],
     child: const MyApp(),

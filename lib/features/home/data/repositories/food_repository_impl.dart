@@ -1,9 +1,10 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:swagat_restaurant/core/error/exception.dart';
-import 'package:swagat_restaurant/core/error/failure.dart';
-import 'package:swagat_restaurant/features/home/data/datasources/restaurant_remote_data_source.dart';
-import 'package:swagat_restaurant/features/home/domain/entities/food.dart';
-import 'package:swagat_restaurant/features/home/domain/repositories/food_repository.dart';
+
+import '../../../../core/error/exception.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/food.dart';
+import '../../domain/repositories/food_repository.dart';
+import '../datasources/restaurant_remote_data_source.dart';
 
 class FoodRepositoryImpl implements FoodRepository {
   final RestaurantRemoteDataSource remoteDataSource;

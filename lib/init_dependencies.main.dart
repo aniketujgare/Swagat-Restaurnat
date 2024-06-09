@@ -11,6 +11,8 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton(() => supabase.client);
 
   // core
+
+  serviceLocator.registerLazySingleton(() => DashboardCubit());
 }
 
 void _initFood() {
