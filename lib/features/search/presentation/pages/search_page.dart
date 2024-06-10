@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/widgets/food_and_kitchen_search_bar.dart';
 import '../../../../core/constants/constants.dart';
@@ -15,23 +16,10 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final bannerCotroller =
       PageController(viewportFraction: 0.91, keepPage: true);
-  final trendingMealController =
-      PageController(viewportFraction: 0.8, keepPage: true);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      trendingMealController
-          .jumpTo(trendingMealController.position.maxScrollExtent * 0.2);
-    });
-  }
 
   @override
   void dispose() {
     bannerCotroller.dispose();
-    trendingMealController.dispose();
-
     super.dispose();
   }
 
@@ -73,12 +61,12 @@ class _SearchPageState extends State<SearchPage> {
               ]
                   .map(
                     (e) => FilterChip(
-                      backgroundColor: AppPallete.whiteColor,
                       color: const WidgetStatePropertyAll<Color>(
-                          AppPallete.whiteColor),
+                        AppPallete.whiteColor,
+                      ),
                       onSelected: (v) => {},
-                      label: Text(e),
-                      padding: EdgeInsets.zero,
+                      label:
+                          Text(e, style: Theme.of(context).textTheme.bodyLarge),
                     ),
                   )
                   .toList(),
@@ -119,8 +107,8 @@ class _SearchPageState extends State<SearchPage> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
-          height: 200,
-          width: 200,
+          height: 200.w,
+          width: 200.w,
           decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.3),
               image: DecorationImage(
@@ -131,11 +119,13 @@ class _SearchPageState extends State<SearchPage> {
                   'https://arenos3.s3.ap-south-1.amazonaws.com/areno_app/Home+Page+images/Fitness+Routine+card.png',
                 ),
               )),
-          child: const Center(
+          child: Center(
             child: Text(
               'Exercise',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: AppPallete.whiteColor),
             ),
           ),
         ),

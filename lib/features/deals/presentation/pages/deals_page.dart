@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -13,23 +14,10 @@ class DealsPage extends StatefulWidget {
 class _DealsPageState extends State<DealsPage> {
   final bannerCotroller =
       PageController(viewportFraction: 0.91, keepPage: true);
-  final trendingMealController =
-      PageController(viewportFraction: 0.8, keepPage: true);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      trendingMealController
-          .jumpTo(trendingMealController.position.maxScrollExtent * 0.2);
-    });
-  }
 
   @override
   void dispose() {
     bannerCotroller.dispose();
-    trendingMealController.dispose();
-
     super.dispose();
   }
 
@@ -43,7 +31,6 @@ class _DealsPageState extends State<DealsPage> {
             padding: EdgeInsets.only(
               left: Constants.horizontalMargin,
               right: Constants.horizontalMargin / 3,
-              bottom: Constants.horizontalMargin / 2,
             ),
             decoration: const BoxDecoration(),
             child: Text(
@@ -83,12 +70,12 @@ class _DealsPageState extends State<DealsPage> {
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10).w,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10).w,
         child: Container(
-          height: 175,
+          height: 145.h,
           decoration: const BoxDecoration(
               image: DecorationImage(
             fit: BoxFit.cover,

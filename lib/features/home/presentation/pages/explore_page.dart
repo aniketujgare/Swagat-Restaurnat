@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../../core/common/widgets/food_and_kitchen_search_bar.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/utils/sized_boxes.dart';
@@ -19,23 +21,10 @@ class ExplorePage extends StatefulWidget {
 class _ExplorePageState extends State<ExplorePage> {
   final bannerCotroller =
       PageController(viewportFraction: 0.91, keepPage: true);
-  final trendingMealController =
-      PageController(viewportFraction: 0.8, keepPage: true);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      trendingMealController
-          .jumpTo(trendingMealController.position.maxScrollExtent * 0.2);
-    });
-  }
 
   @override
   void dispose() {
     bannerCotroller.dispose();
-    trendingMealController.dispose();
-
     super.dispose();
   }
 
@@ -54,9 +43,8 @@ class _ExplorePageState extends State<ExplorePage> {
               border: Border(
                 bottom: BorderSide(
                   style: BorderStyle.solid,
-                  color: Color(
-                      0XFFD2D3D7), // Change this to your desired border color
-                  width: 1.0, // Change this to your desired border width
+                  color: Color(0XFFD2D3D7),
+                  width: 1.0,
                 ),
               ),
             ),
@@ -66,8 +54,8 @@ class _ExplorePageState extends State<ExplorePage> {
                 SvgPicture.asset(
                   'assets/svg/place.svg',
                   colorFilter:
-                      const ColorFilter.mode(AppPallete.green, BlendMode.color),
-                  height: 25,
+                      const ColorFilter.mode(AppPallete.green, BlendMode.srcIn),
+                  height: 30.h,
                 ),
                 SizedBoxWidth10,
                 Column(
@@ -76,7 +64,9 @@ class _ExplorePageState extends State<ExplorePage> {
                   children: [
                     Text(
                       'Delivery To',
-                      style: Theme.of(context).textTheme.labelSmall,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: AppPallete.misticBlue,
+                          ),
                     ),
                     Row(
                       children: [
@@ -85,8 +75,8 @@ class _ExplorePageState extends State<ExplorePage> {
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         SizedBox(
-                          height: 25,
-                          width: 25,
+                          height: 28.w,
+                          width: 28.w,
                           child: IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.arrow_drop_down),
@@ -105,7 +95,6 @@ class _ExplorePageState extends State<ExplorePage> {
                     '3',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: AppPallete.whiteColor,
-                          fontSize: 10,
                         ),
                   ),
                   onPressed: () {},
@@ -118,43 +107,7 @@ class _ExplorePageState extends State<ExplorePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: Constants.horizontalMargin,
-              vertical: Constants.horizontalMargin,
-            ),
-            child: TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                prefixIcon: const Icon(
-                  CupertinoIcons.search,
-                  color: AppPallete.green,
-                ), // Leading widget
-                suffixIcon: IconButton(
-                  // Trailing widget
-                  icon: const Icon(
-                    (CupertinoIcons.slider_horizontal_3),
-                    color: AppPallete.green,
-                  ),
-                  onPressed: () {
-                    // Implement the clear functionality here
-                  },
-                ),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide:
-                        const BorderSide(color: AppPallete.transparentColor)),
-                fillColor: AppPallete.misticBlueShade4.withOpacity(0.3),
-                hintText: 'Search food and Ketchens',
-                hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: AppPallete.misticBlueShade3,
-                      fontSize: 15,
-                    ),
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 15.0, horizontal: 12.0),
-              ),
-            ),
-          ),
+          const FoodAndKitchenSearchBar(),
           SizedBox(
             height: 95,
             child: ListView(
@@ -170,24 +123,24 @@ class _ExplorePageState extends State<ExplorePage> {
                         children: [
                           CircleAvatar(
                             backgroundColor: AppPallete.green,
-                            radius: 30,
+                            radius: 35.w,
                             child: ClipOval(
                               child: Image.network(
                                 'https://img.freepik.com/free-photo/tasty-burger-isolated-white-background-fresh-hamburger-fastfood-with-beef-cheese_90220-1063.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1716681600&semt=sph',
                                 fit: BoxFit.scaleDown,
-                                height: 50,
+                                height: 55.w,
                               ),
                             ),
                           ),
                           SizedBoxHeight4,
                           Text(
                             e,
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      color: AppPallete.black,
-                                      height: 2,
-                                      fontSize: 12,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                             overflow: TextOverflow.ellipsis,
                           )
                         ],
@@ -203,7 +156,7 @@ class _ExplorePageState extends State<ExplorePage> {
             color: AppPallete.misticBlueShade4.withOpacity(0.3),
           ),
           SizedBox(
-            height: 150,
+            height: 165.h,
             child: PageView.builder(
               itemCount: 3,
               scrollDirection: Axis.horizontal,
@@ -218,11 +171,11 @@ class _ExplorePageState extends State<ExplorePage> {
             child: SmoothPageIndicator(
               controller: bannerCotroller,
               axisDirection: Axis.horizontal,
-              effect: const ExpandingDotsEffect(
+              effect: ExpandingDotsEffect(
                   dotColor: AppPallete.misticBlueShade3,
                   activeDotColor: AppPallete.black,
-                  dotHeight: 8,
-                  dotWidth: 8,
+                  dotHeight: 8.w,
+                  dotWidth: 8.w,
                   expansionFactor: 2),
               count: 3,
             ),
@@ -238,20 +191,15 @@ class _ExplorePageState extends State<ExplorePage> {
               vertical: Constants.horizontalMargin / 2,
               horizontal: Constants.horizontalMargin,
             ),
-            child: Text(
-              'Trending Meals',
-              textAlign: TextAlign.left,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge
-                  ?.copyWith(fontSize: 20),
-            ),
+            child: Text('Trending Meals',
+                textAlign: TextAlign.left,
+                style: Theme.of(context).textTheme.titleLarge),
           ),
           SizedBox(
             height: 220,
             child: ListView.builder(
                 itemCount: 3,
-                itemExtent: 320,
+                itemExtent: 320.w,
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(
                     horizontal: Constants.horizontalMargin),
@@ -274,7 +222,6 @@ class _ExplorePageState extends State<ExplorePage> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: SizedBox(
-          height: 150,
           child: Image.network(
             'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/online-order-now-restaurant-discount-banner-design-template-c8abb6b3b188751b2cb637bc3871cbfb_screen.jpg?ts=1617107213',
             fit: BoxFit.fill,
@@ -289,10 +236,10 @@ class _ExplorePageState extends State<ExplorePage> {
       elevation: 2,
       color: AppPallete.whiteColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10).w,
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10).w,
         child: SizedBox(
           child: Column(
             children: [
@@ -307,8 +254,8 @@ class _ExplorePageState extends State<ExplorePage> {
                       height: double.infinity,
                     ),
                     Positioned(
-                      top: 12,
-                      right: 12,
+                      top: 12.h,
+                      right: 12.w,
                       child: CircleAvatar(
                         backgroundColor: AppPallete.whiteColor,
                         child: IconButton(
@@ -319,8 +266,8 @@ class _ExplorePageState extends State<ExplorePage> {
                       ),
                     ),
                     Positioned(
-                      top: 12,
-                      left: 12,
+                      top: 12.h,
+                      left: 12.w,
                       child: Container(
                         decoration: BoxDecoration(
                           color: AppPallete.whiteColor,
@@ -338,21 +285,12 @@ class _ExplorePageState extends State<ExplorePage> {
                                   .textTheme
                                   .titleLarge
                                   ?.copyWith(
-                                    fontSize: 20,
-                                    height: 0,
                                     color: AppPallete.green,
                                   ),
                               children: [
                                 TextSpan(
                                   text: '140',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge
-                                      ?.copyWith(
-                                        fontSize: 16,
-                                        height: 0,
-                                        color: AppPallete.black,
-                                      ),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ],
                             ),
@@ -376,13 +314,8 @@ class _ExplorePageState extends State<ExplorePage> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Vidarbha Special Thali',
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                      fontSize: 16,
-                                    ),
-                          ),
+                          Text('Vidarbha Special Thali',
+                              style: Theme.of(context).textTheme.bodyLarge),
                           const Spacer(),
                           Icon(
                             CupertinoIcons.star_fill,
@@ -396,7 +329,6 @@ class _ExplorePageState extends State<ExplorePage> {
                                   .textTheme
                                   .bodyMedium
                                   ?.copyWith(
-                                    fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                   ),
                               children: [
@@ -406,10 +338,8 @@ class _ExplorePageState extends State<ExplorePage> {
                                     '(25+)',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodySmall
+                                        .labelSmall
                                         ?.copyWith(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.bold,
                                           color: AppPallete.misticBlueShade1,
                                         ),
                                   ),
@@ -431,16 +361,15 @@ class _ExplorePageState extends State<ExplorePage> {
                             '₹ 35 Delivery Fee',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
+                                .labelLarge
                                 ?.copyWith(
-                                  fontSize: 14,
                                   color: AppPallete.misticBlueShade2,
                                 ),
                           ),
                           SizedBoxWidth10,
                           Container(
                             width: 1,
-                            height: 13,
+                            height: 13.h,
                             color: AppPallete.misticBlueShade2,
                           ),
                           SizedBoxWidth10,
@@ -454,9 +383,8 @@ class _ExplorePageState extends State<ExplorePage> {
                             '10 - 15 min',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleLarge
+                                .labelLarge
                                 ?.copyWith(
-                                  fontSize: 14,
                                   color: AppPallete.misticBlueShade2,
                                 ),
                           )

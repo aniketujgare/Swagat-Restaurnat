@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -14,28 +15,6 @@ class InboxPage extends StatefulWidget {
 }
 
 class _InboxPageState extends State<InboxPage> {
-  final bannerCotroller =
-      PageController(viewportFraction: 0.91, keepPage: true);
-  final trendingMealController =
-      PageController(viewportFraction: 0.8, keepPage: true);
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      trendingMealController
-          .jumpTo(trendingMealController.position.maxScrollExtent * 0.2);
-    });
-  }
-
-  @override
-  void dispose() {
-    bannerCotroller.dispose();
-    trendingMealController.dispose();
-
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +25,6 @@ class _InboxPageState extends State<InboxPage> {
             padding: EdgeInsets.only(
               left: Constants.horizontalMargin,
               right: Constants.horizontalMargin / 3,
-              bottom: Constants.horizontalMargin / 2,
             ),
             decoration: const BoxDecoration(),
             child: Row(
@@ -79,9 +57,9 @@ class _InboxPageState extends State<InboxPage> {
               indicatorPadding: EdgeInsets.symmetric(
                   horizontal: Constants.horizontalMargin * 1.5),
               indicatorWeight: 2.5,
-              labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    height: 0,
+              labelStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: AppPallete.green,
+                    fontWeight: FontWeight.bold,
                   ),
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: const [
@@ -110,8 +88,8 @@ class _InboxPageState extends State<InboxPage> {
                             textAlign: TextAlign.left,
                             style: Theme.of(context)
                                 .textTheme
-                                .labelLarge
-                                ?.copyWith(fontSize: 20),
+                                .titleLarge
+                                ?.copyWith(fontSize: 18.sp),
                           ),
                         ),
                         ListView.separated(
@@ -140,12 +118,12 @@ class _InboxPageState extends State<InboxPage> {
                             textAlign: TextAlign.left,
                             style: Theme.of(context)
                                 .textTheme
-                                .labelLarge
-                                ?.copyWith(fontSize: 20),
+                                .titleLarge
+                                ?.copyWith(fontSize: 18.sp),
                           ),
                         ),
                         ListView.separated(
-                          itemCount: 12,
+                          itemCount: 2,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           separatorBuilder: (context, index) => Container(
@@ -162,6 +140,7 @@ class _InboxPageState extends State<InboxPage> {
                   ListView.builder(
                     itemCount: 10,
                     scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
                     itemBuilder: (_, index) {
                       return Padding(
                         padding:
@@ -188,8 +167,8 @@ class _InboxPageState extends State<InboxPage> {
       child: Row(
         children: [
           Container(
-            height: 75,
-            width: 75,
+            height: 65.w,
+            width: 65.w,
             margin: EdgeInsets.only(right: Constants.horizontalMargin),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -209,22 +188,22 @@ class _InboxPageState extends State<InboxPage> {
               Text(
                 'Wade Warren Food',
                 textAlign: TextAlign.left,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontSize: 17),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
                 '3 items  •  Order ID #023481',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    height: 1.8, fontSize: 13, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppPallete.misticBlueShade1,
+                    ),
               ),
               Text(
                 'Oct 2, 11:31am',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    height: 1.6, fontSize: 14, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
             ],
           ),
@@ -236,19 +215,13 @@ class _InboxPageState extends State<InboxPage> {
               RichText(
                 text: TextSpan(
                   text: '₹ ',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: 20,
-                        height: 0,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppPallete.green,
                       ),
                   children: [
                     TextSpan(
                       text: '140',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontSize: 16,
-                            height: 0,
-                            color: AppPallete.black,
-                          ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
                 ),
@@ -260,10 +233,10 @@ class _InboxPageState extends State<InboxPage> {
                     horizontal: Constants.horizontalMargin),
                 label: Text(
                   'View Order',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontSize: 14),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppPallete.black,
+                      ),
                 ),
               ),
             ],

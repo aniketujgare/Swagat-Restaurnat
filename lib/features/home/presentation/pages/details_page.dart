@@ -40,7 +40,6 @@ class _DetailsPageState extends State<DetailsPage> {
                 backgroundColor: AppPallete.whiteColor,
                 child: IconButton(
                   onPressed: () => context.pop(),
-                  iconSize: 28,
                   icon: const Icon(CupertinoIcons.chevron_left),
                   padding: EdgeInsets.zero,
                   style: const ButtonStyle(

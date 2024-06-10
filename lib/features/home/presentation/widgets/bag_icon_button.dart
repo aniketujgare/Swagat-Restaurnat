@@ -19,7 +19,7 @@ class AppBarActionIconButton extends StatelessWidget {
             icon,
             color: AppPallete.misticBlueShade1,
           ),
-          iconSize: 28,
+          // iconSize: 28,
           padding: EdgeInsets.zero,
           style: const ButtonStyle(
             backgroundColor: WidgetStatePropertyAll(AppPallete.whiteColor),

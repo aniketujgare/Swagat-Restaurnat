@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_pallete.dart';
 
@@ -11,7 +12,6 @@ class AppTheme {
         borderRadius: BorderRadius.circular(10),
       );
   static final lightThemeMode = ThemeData.light().copyWith(
-    scaffoldBackgroundColor: Colors.white,
     chipTheme: const ChipThemeData(
         color: WidgetStatePropertyAll(AppPallete.backgroundColor),
         side: BorderSide.none),
@@ -22,82 +22,93 @@ class AppTheme {
       focusedBorder: _border(AppPallete.gradient2),
       errorBorder: _border(AppPallete.errorColor),
     ),
-    textTheme: const TextTheme(
+    //! Text Reference: https://api.flutter.dev/flutter/material/TextTheme-class.html
+    textTheme: TextTheme(
       displayLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: AppPallete.black,
+        fontSize: 57.sp,
       ),
       displayMedium: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
+        fontSize: 45.sp,
       ),
-      displaySmall:
-          TextStyle(fontFamily: 'Gilroy', color: AppPallete.misticBlueShade1),
+      displaySmall: TextStyle(
+        fontFamily: 'Gilroy',
+        color: AppPallete.misticBlueShade1,
+        fontSize: 36.sp,
+      ),
       bodyLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: AppPallete.black,
+        fontSize: 16.sp,
       ),
       bodyMedium: TextStyle(
         fontFamily: 'Gilroy',
-        fontWeight: FontWeight.w500,
         color: AppPallete.black,
+        fontWeight: FontWeight.w500,
+        fontSize: 14.sp,
       ),
-      bodySmall:
-          TextStyle(fontFamily: 'Gilroy', color: AppPallete.misticBlueShade1),
+      bodySmall: TextStyle(
+        fontFamily: 'Gilroy',
+        color: AppPallete.misticBlueShade1,
+        fontSize: 12.sp,
+      ),
       headlineLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: AppPallete.black,
+        fontSize: 32.sp,
       ),
       headlineMedium: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
+        fontSize: 28.sp,
       ),
-      headlineSmall:
-          TextStyle(fontFamily: 'Gilroy', color: AppPallete.misticBlueShade1),
+      headlineSmall: TextStyle(
+        fontFamily: 'Gilroy',
+        color: AppPallete.misticBlueShade1,
+        fontSize: 24.sp,
+      ),
       labelLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: AppPallete.black,
+        fontSize: 14.sp,
       ),
       labelMedium: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
+        fontSize: 12.sp,
       ),
       labelSmall: TextStyle(
         fontFamily: 'Gilroy',
         color: AppPallete.misticBlueShade1,
+        fontSize: 11.sp,
       ),
-
-      // headline2: TextStyle(fontFamily: 'CustomFont', fontWeight: FontWeight.bold),
-      // headline3: TextStyle(fontFamily: 'CustomFont', fontWeight: FontWeight.bold),
-      // headline4: TextStyle(fontFamily: 'CustomFont', fontWeight: FontWeight.bold),
-      // headline5: TextStyle(fontFamily: 'CustomFont', fontWeight: FontWeight.bold),
-      // headline6: TextStyle(fontFamily: 'CustomFont', fontWeight: FontWeight.bold),
       titleMedium: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.w500,
         color: AppPallete.black,
+        fontSize: 16.sp,
       ),
       titleLarge: TextStyle(
         fontFamily: 'Gilroy',
         fontWeight: FontWeight.bold,
         color: AppPallete.black,
+        fontSize: 22.sp,
       ),
       titleSmall: TextStyle(
         fontFamily: 'Gilroy',
-        color: AppPallete.black,
+        color: AppPallete.misticBlueShade1,
+        fontSize: 14.sp,
       ),
-      // bodyText1: TextStyle(fontFamily: 'CustomFont'),
-      // bodyText2: TextStyle(fontFamily: 'CustomFont'),
-      // caption: TextStyle(fontFamily: 'CustomFont'),
-      // button: TextStyle(fontFamily: 'CustomFont'),
-      // overline: TextStyle(fontFamily: 'CustomFont'),
     ),
   );
 }
